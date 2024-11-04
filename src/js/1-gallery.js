@@ -77,3 +77,25 @@ const galleryMarkup = images.map(({preview, original, description}) => `<li clas
 </li>
 `).join('');
 gallery.innerHTML = galleryMarkup;
+
+gallery.addEventListener('click', event => {
+    if (event.target.closest('.gallery-link')) {
+        event.preventDefault();
+    }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const images = document.querySelectorAll('.gallery-image');
+  images.forEach(element => {
+    element.addEventListener('click', function (event) {
+      const imageUrl = event.target.dataset.source 
+      const instance = simpleLightbox.create(`
+    <img src="${imageUrl}" width="800" height="600">
+`)
+
+instance.show()
+    })
+    element.style.width = '360px';
+    element.style.height = '200px'
+  });
+});
